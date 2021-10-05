@@ -25,6 +25,7 @@ jobs:
             cd "$dir"
             cargo build --verbose
             cargo test --verbose
+            cd ..
           fi
         done
         # add some unit tests later
