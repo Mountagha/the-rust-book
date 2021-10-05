@@ -19,10 +19,12 @@ jobs:
     - name: Build and test
       run: |
         # need to find a way to test all of them
-        cd hello-cargo
-        cargo build --verbose
-        cargo test --verbose
+        for dir in `ls`
+        do
+          if [ -d "$dir" ]; then
+            cd "$dir"
+            cargo build --verbose
+            cargo test --verbose
+          fi
+        done
         # add some unit tests later
-        cd ../guessing-game
-        cargo build --verbose
-        cargo test --verbose
