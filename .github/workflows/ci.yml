@@ -23,9 +23,8 @@ jobs:
         do
           if [ -d "$dir" ]; then
             cd "$dir"
-            cur_dir = `pwd` # don't know if condition works with relative paths
             # use rust cargo packaging only if it's a cargo dir
-            if [[ -f "$cur_dir/Cargo.toml" ]; then
+            if [ -f "$(pwd)/Cargo.toml" ]; then
               cargo build --verbose
               # add some unit tests later
               cargo test --verbose
