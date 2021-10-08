@@ -24,8 +24,8 @@ jobs:
           if [ -d "$dir" ]; then
             cd "$dir"
             cargo build --verbose
+            # add some unit tests later
             cargo test --verbose
             cd ..
           fi
         done
-        # add some unit tests later
