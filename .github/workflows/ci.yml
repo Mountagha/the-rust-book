@@ -24,7 +24,7 @@ jobs:
           if [ -d "$dir" ]; then
             cd "$dir"
             # use rust cargo packaging only if it's a cargo dir
-            if [ -f "$dir/Cargo.toml" ]; then
+            if [[ -f "$(pwd)/Cargo.toml" ]; then
               cargo build --verbose
               # add some unit tests later
               cargo test --verbose
