@@ -1,3 +1,19 @@
+use std::fs::File;
+use std::io::ErrorKind;
+
 fn main() {
-    panic!("Welcome in the world of errors handling");
+    let f = File::open("hello.txt");
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello world"){
+                Ok(fc) => fc,
+                Err(e) => panic!("Error when creating the file {:?}", e),
+            },
+            other_error => {
+                panic!("Problem opening the file {:?}", other_error)
+            }
+        },
+    };
+
 }
