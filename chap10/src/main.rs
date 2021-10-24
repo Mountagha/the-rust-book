@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 use  std::fmt::Display;
 
->>>>>>> bc6c1ef77250a4634eb33b4ea04b89eefe311697
 fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     let mut largest = list[0];
     for &item in list {
@@ -11,8 +8,6 @@ fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
         }
     }
     largest
-<<<<<<< HEAD
-=======
 }
 
 struct Pair<T> {
@@ -29,7 +24,6 @@ impl<T: Display + PartialOrd> Pair<T> {
         }
     }
 
->>>>>>> bc6c1ef77250a4634eb33b4ea04b89eefe311697
 }
 fn main() {
     let number_list = vec![10, 40, 5, 100, 80];
