@@ -89,7 +89,8 @@ Duct tape.";
 Rust:
 safe, fast, productive.
 Pick three.
-Trust me.";
+Trust me.
+test";
         assert_eq!(vec!["Rust:", "Trust me."], search_case_insensitive(query, content));
     }
 }
