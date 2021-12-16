@@ -19,14 +19,13 @@ jobs:
     - name: Build and test
       run: |
         # need to find a way to test all of them
-        for dir in `ls`
+        for dir in `find . -type d`
         do
           if [ -d "$dir" ]; then
             cd "$dir"
             # use rust cargo packaging only if it's a cargo dir
             if [ -f "$(pwd)/Cargo.toml" ]; then
               cargo build --verbose
-              # add some unit tests later
               cargo test --verbose
             fi
             cd ..
