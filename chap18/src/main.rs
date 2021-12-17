@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 enum Color {
     Rgb(i32, i32, i32),
@@ -44,8 +43,4 @@ fn main() {
         Some(x) => println!("{}", x),
         None => ()
     }
-=======
-fn main() {
-    println!("Hello, world!");
->>>>>>> b803a64e39945449cf54770b024e22153e22d51c
 }
