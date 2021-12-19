@@ -1,6 +1,27 @@
+use std::thread;
+use std::sync::mpsc;
 
-pub struct ThreadPool;
 
+pub struct ThreadPool {
+    workers: Vec<Worker>,
+    sender: mpsc::Sender<Job>,
+}
+
+struct Worker {
+    id: usize;
+    thread: thread::JoinHandle<()>;
+}
+
+struct Job;
+
+impl Worker {
+    fn new(id: usize, receiver: mpsc::Receiver<Job>) -> Worker {
+        let thread = thread::std::thread::spawn(|| {
+            receiver;
+        });
+        Worker {id, thread}
+    }
+}
 impl ThreadPool {
     /// Create a new ThreadPool.
     /// 
@@ -10,7 +31,16 @@ impl ThreadPool {
     /// 
     /// The `new` function will panic if the size is zero
     pub fn new(size: usize) -> ThreadPool {
-        ThreadPool
+        assert!(size > 0);
+        
+        let (sender, receiver) = mpsc::channel();
+
+        let mut workers = Vec::with_capacity(size);
+
+        for id in 0..size {
+            workers.push(Worker::new(id, receiver));
+        }
+        ThreadPool { workers, sender }
     }
     
     pub fn execute<F>(&self, f: F)
