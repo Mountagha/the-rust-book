@@ -14,13 +14,14 @@ struct Progress<Iter, Bound> {
     bound: Bound, 
 }
 
-trait ProgressDisplay {
+trait ProgressDisplay: Sized {
     fn display<Iter>(&self, progress: &Progress<Iter, Self>);
 }
 
 impl ProgressDisplay for Unbounded {
   fn display<Iter>(&self, progress: &Progress<Iter, Self>){
     println!("{}", "*".repeat(progress.i));
+  }
 }
 
 impl ProgressDisplay for Bounded {
@@ -46,7 +47,7 @@ where Iter: ExactSizeIterator {
         let bound = Bounded {
            bound: self.iter.len(),
            delims: ('[', ']') 
-        }
+        };
         Progress { i: self.i, iter: self.iter, bound }
     }
 }
@@ -59,12 +60,13 @@ impl<Iter> Progress<Iter, Bounded> {
 }
 
 
-impl<Iter> Iterator for Progress<Iter> 
-where Iter: Iterator {
+impl<Iter, Bound> Iterator for Progress<Iter, Bound> 
+where Iter: Iterator, Bound: ProgressDisplay {
     type Item = Iter::Item;
 
     fn next(&mut self) -> Option<Self::Item> {
         println!("{}", CLEAR);
+        self.bound.display(&self);
         self.i += 1;
 
         self.iter.next()
@@ -72,11 +74,11 @@ where Iter: Iterator {
 }
 
 trait ProgressIteratorExt: Sized {
-    fn progress(self) -> Progress<Self>;
+    fn progress(self) -> Progress<Self, Unbounded>;
 }
 
 impl<Iter> ProgressIteratorExt for Iter {
-    fn progress(self) -> Progress<Self> {
+    fn progress(self) -> Progress<Self, Unbounded> {
         Progress::new(self)
     }
 }
@@ -88,7 +90,7 @@ fn expensive_calculation(_n: &i32){
 
 fn main() {
      let brackets = ('<', '>');
-    //for n in (0 .. ).progress() {
+    //for n in (0 .. ).progress().with_delims(brackets) {
     //    expensive_calculation(&n);
     //}
     let v = vec![1, 2, 3];
