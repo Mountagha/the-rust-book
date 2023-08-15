@@ -1,5 +1,8 @@
 pub fn build_proverb(list: &[&str]) -> String {
-    unimplemented!("build a proverb from this list of items: {list:?}")
+    for pair in list.windows(2) {
+        println!("For want of a {} the {} was lost.", pair[0], pair[1]);
+    }
+    // println!("And all for the want of a {}", end)
 }
 
 #[test]
