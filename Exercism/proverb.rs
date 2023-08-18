@@ -4,6 +4,14 @@ pub fn build_proverb(list: &[&str]) -> String {
     }
     // println!("And all for the want of a {}", end)
 }
+pub fn build_proverb(list: &[&str]) -> String {
+    let mut phrases = Vec::new();
+    for pair in list.windows(2) {
+        phrases.push(format!("For want of a {} the {} was lost.", pair[0], pair[1]));
+    }
+    phrases.push("And all for the want of a {}".to_string());
+    return phrases.join("\n");
+}
 
 #[test]
 fn test_two_pieces() {
