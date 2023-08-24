@@ -1,16 +1,16 @@
 use std::iter::once;
 
-pub fn build_proverb(list: &[&str]) -> String {
-    if list.len() < 1 {
-        return String::new();
-    }
-    let mut phrases = Vec::new();
-    for pair in list.windows(2) {
-        phrases.push(format!("For want of a {} the {} was lost.", pair[0], pair[1]));
-    }
-    phrases.push(format!("And all for the want of a {}.", list[0]));
-    phrases.join("\n")
-}
+// pub fn build_proverb(list: &[&str]) -> String {
+//     if list.len() < 1 {
+//         return String::new();
+//     }
+//     let mut phrases = Vec::new();
+//     for pair in list.windows(2) {
+//         phrases.push(format!("For want of a {} the {} was lost.", pair[0], pair[1]));
+//     }
+//     phrases.push(format!("And all for the want of a {}.", list[0]));
+//     phrases.join("\n")
+// }
 
 pub fn build_proverb(list: &[&str]) -> String {
     match list.first() {
