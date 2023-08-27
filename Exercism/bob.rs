@@ -1,5 +1,11 @@
 pub fn reply(message: &str) -> &str {
-    unimplemented!("have Bob reply to the incoming message: {message}")
+    match message {
+        "How are you" => "Sure.",
+        message.chars().all(|c| c.is_uppercase()) => "Whoa, chill out!",
+        message.contains("?") => "Calm down, I know what Im' doing!",
+        "" || "??"            => "Fine. Be that way!"
+        _             => "Whatever."
+    }
 }
 
 fn process_response_case(phrase: &str, expected_response: &str) {
