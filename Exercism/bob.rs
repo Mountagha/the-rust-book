@@ -1,9 +1,9 @@
 pub fn reply(message: &str) -> &str {
     match message {
         "How are you" => "Sure.",
-        message.chars().all(|c| c.is_uppercase()) => "Whoa, chill out!",
+        message.chars().all(|c| c.is_uppercase()).collect() => "Whoa, chill out!",
         message.contains("?") => "Calm down, I know what Im' doing!",
-        "" || "??"            => "Fine. Be that way!"
+        message.empty() || "??"            => "Fine. Be that way!"
         _             => "Whatever."
     }
 }
