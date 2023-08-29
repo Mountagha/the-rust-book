@@ -1,11 +1,20 @@
 pub fn reply(message: &str) -> &str {
-    match message {
-        "How are you" => "Sure.",
-        message.chars().all(|c| c.is_uppercase()).collect() => "Whoa, chill out!",
-        message.contains("?") => "Calm down, I know what Im' doing!",
-        message.empty() || "??"            => "Fine. Be that way!"
-        _             => "Whatever."
+    if message.contains("?") {
+        return "Sure.";
+    } else if message.chars().all(|c| c.is_uppercase()) {
+        return "Whoa, chill out!";
+    } else if message.contains("?") && message.chars().all(|c| c.is_uppercase()) {
+        return "Calm down, I know what I'm doing!";
+    } else {
+        return "Whatever."
     }
+    //match message {
+        //"How are you" => "Sure.",
+        //message.chars().all(|c| c.is_uppercase()).collect() => "Whoa, chill out!",
+        //message.contains("?") => "Calm down, I know what Im' doing!",
+        //message.empty()            => "Fine. Be that way!"
+        //_             => "Whatever."
+    //}
 }
 
 fn process_response_case(phrase: &str, expected_response: &str) {
