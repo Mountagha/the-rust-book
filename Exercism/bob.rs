@@ -1,21 +1,17 @@
 pub fn reply(message: &str) -> &str {
-    if message.contains("?") {
-        return "Sure.";
-    } else if message.chars().all(|c| c.is_uppercase()) {
-        return "Whoa, chill out!";
-    } else if message.contains("?") && message.chars().all(|c| c.is_uppercase()) {
+    if message.contains("?") && message.chars().all(|c| c.is_uppercase() || c.is_numeric()) {
         return "Calm down, I know what I'm doing!";
+    } else if message.chars().all(|c| c.is_uppercase() || c.is_numeric()) {
+        return "Whoa, chill out!";
+    } else if message.contains("?") {
+        return "Sure.";
+    } else if message.is_empty() || message.chars().all(|c| c.is_whitespace()) {
+        return "Fine. Be that way!"
     } else {
         return "Whatever."
     }
-    //match message {
-        //"How are you" => "Sure.",
-        //message.chars().all(|c| c.is_uppercase()).collect() => "Whoa, chill out!",
-        //message.contains("?") => "Calm down, I know what Im' doing!",
-        //message.empty()            => "Fine. Be that way!"
-        //_             => "Whatever."
-    //}
 }
+
 
 fn process_response_case(phrase: &str, expected_response: &str) {
     assert_eq!(bob::reply(phrase), expected_response);
