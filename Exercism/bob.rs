@@ -1,15 +1,18 @@
 pub fn reply(message: &str) -> &str {
-    if message.contains("?") && message.chars().all(|c| c.is_uppercase() || c.is_numeric()) {
-        return "Calm down, I know what I'm doing!";
-    } else if message.chars().all(|c| c.is_uppercase() || c.is_numeric()) {
-        return "Whoa, chill out!";
-    } else if message.contains("?") {
-        return "Sure.";
-    } else if message.is_empty() || message.chars().all(|c| c.is_whitespace()) {
-        return "Fine. Be that way!"
-    } else {
-        return "Whatever."
+    if message.trim_end().chars().rev().next() == Some('?') {
+        if message.chars().all(|c| (c.is_alphabetic() && c.is_uppercase()) || c.is_numeric()) {
+            return "Calm down, I know what I'm doing!";
+        } else {
+            return "Sure.";
+        }
     }
+    if message.chars().all(|c| (c.is_uppercase() && c.is_alphabetic()) || c.is_numeric()) {
+        return "Whoa, chill out!";
+    } 
+    if message.is_empty() || message.chars().all(|c| c.is_whitespace()) {
+        return "Fine. Be that way!"
+    } 
+    "Whatever."
 }
 
 
